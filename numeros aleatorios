@@ -1,0 +1,40 @@
+Realizar un programa en Python que genere:
+100 números aleatorios por el método de centros al cuadrado
+100 números aleatorios por el método de medios cuadrados
+
+
+def centros_cuadrados(seed, n=100, width=4):
+    # seed: semilla inicial
+    # n: cantidad de números a generar
+    # width: cantidad de dígitos que queremos obtener en cada número generado
+    
+    random_numbers = []  # Lista para almacenar los números generados
+    
+    for _ in range(n):
+        # Elevar la semilla al cuadrado
+        squared = seed ** 2
+        
+        # Convertir el resultado en una cadena para poder manipular los dígitos
+        squared_str = str(squared).zfill(width * 2)  # Rellenar con ceros a la izquierda si es necesario
+        
+        # Obtener los dígitos centrales
+        start = (len(squared_str) - width) // 2
+        middle_digits = squared_str[start:start + width]
+        
+        # Convertir los dígitos centrales en un número entero
+        seed = int(middle_digits)
+        
+        # Guardar el número generado en la lista
+        random_numbers.append(seed)
+    
+    return random_numbers
+
+
+# Ejemplo de uso
+semilla_inicial = 5678  # Puedes cambiar la semilla para generar otros números
+numeros_aleatorios = centros_cuadrados(semilla_inicial)
+
+# Mostrar los números generados
+for i, num in enumerate(numeros_aleatorios):
+    print(f"Número {i + 1}: {num}")
+
